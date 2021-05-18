@@ -1,4 +1,4 @@
-package com.Project.ESB.Controller;
+package project.esb.demo.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,28 +8,36 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.Project.ESB.Model.Droit;
-import com.Project.ESB.Service.DroitService;
+import project.esb.demo.model.DroitModel;
+import project.esb.demo.model.ProtocoleModel;
+import project.esb.demo.service.DroitService;
+import project.esb.demo.service.ProtocoleService;
+
 
 	@RestController
-	@RequestMapping("/Droit")
-	public class DroitController {
-		private final DroitService DroitService;
+	@RequestMapping("/DroitModel")
+	public class DroitController{
+		private final DroitService droitService;
 		
-	public DroitController(DroitService droitService)	{
-		this.DroitService = droitService;
+		public DroitController(DroitService droitService)	{
+		this.droitService = droitService;
 	}
+
+
+
 	@PostMapping("/ajouter")
-	public ResponseEntity<Droit>ajouterDroit(@RequestBody Droit droit) {
-		Droit  newDroit=DroitService.ajouter(droit);
-	return new ResponseEntity<>(newDroit,HttpStatus.CREATED);
+	public ResponseEntity<DroitModel>ajouter(@RequestBody DroitModel droitModel) {
+		DroitModel  newDroitModel=droitService.ajouter(droitModel);
+	return new ResponseEntity<>(newDroitModel,HttpStatus.CREATED);
 
 	}
 	@PutMapping("/modifier")
-	public ResponseEntity<Droit>modifierDroit(@RequestBody Droit droit) {
-		Droit  modifierDroit=DroitService.modifier(droit);
-	return new ResponseEntity<>(modifierDroit,HttpStatus.OK);
+	public ResponseEntity<DroitModel>updateDroitModel(@RequestBody DroitModel droitModel) {
+		DroitModel  updateDroitModel=droitService.modifier(droitModel);
+	return new ResponseEntity<>(updateDroitModel,HttpStatus.OK);
 
 	}
+
 	}
+
 

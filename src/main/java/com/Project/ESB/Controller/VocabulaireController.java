@@ -1,35 +1,38 @@
-package com.Project.ESB.Controller;
+package project.esb.demo.controller;
 
+import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.Project.ESB.IService.VocabulaireIService;
-import com.Project.ESB.Model.Vocabulaire;
-import com.Project.ESB.Service.VocabulaireService;
+import project.esb.demo.model.VocabulaireModel;
+import project.esb.demo.service.VocabulaireService;
 
 @RestController
-@RequestMapping("/Vocabulaire")
+@RequestMapping("/VocabulaireModel")
 public class VocabulaireController {
-	private final VocabulaireIService VocabulaireService;
-	
-public VocabulaireController(VocabulaireService VocabulaireService)	{
-	this.VocabulaireService = VocabulaireService;
-}
-@PostMapping("/ajouter")
-public ResponseEntity<Vocabulaire>ajouterVocabulaire(@RequestBody Vocabulaire Vocabulaire) {
-	Vocabulaire  newVocabulaire=VocabulaireService.ajouter(Vocabulaire);
-return new ResponseEntity<>(newVocabulaire,HttpStatus.CREATED);
+	private final VocabulaireService vocabulaireService;
 
-}
-@PutMapping("/modifier")
-public ResponseEntity<Vocabulaire>modifierVocabulaire(@RequestBody Vocabulaire Vocabulaire) {
-	Vocabulaire  modifierVocabulaire=VocabulaireService.modifier(Vocabulaire);
-return new ResponseEntity<>(modifierVocabulaire,HttpStatus.OK);
+	public VocabulaireController(VocabulaireService vocabulaireService) {
+		this.vocabulaireService = vocabulaireService;
+	}
 
-}
+	@PostMapping("/ajouter")
+	public ResponseEntity<VocabulaireModel> ajouter(@RequestBody VocabulaireModel vocabulaireModel) {
+		VocabulaireModel newVocabulaireModel = vocabulaireService.ajouter(vocabulaireModel);
+		return new ResponseEntity<>(newVocabulaireModel, HttpStatus.CREATED);
+
+	}
+
+	@PutMapping("/modifier")
+	public ResponseEntity<VocabulaireModel> updateVocabulaireModel(@RequestBody VocabulaireModel vocabulaireModel) {
+		VocabulaireModel updateVocabulaireModel = vocabulaireService.modifier(vocabulaireModel);
+		return new ResponseEntity<>(updateVocabulaireModel, HttpStatus.OK);
+
+	}
+
 }

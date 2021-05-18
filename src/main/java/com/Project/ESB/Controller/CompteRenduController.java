@@ -1,32 +1,22 @@
-package com.Project.ESB.Controller;
+package project.esb.demo.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import com.Project.ESB.Model.CompteRendu;
-import com.Project.ESB.Service.CompteRenduService;
+import project.esb.demo.service.CompteRenduService;
+import project.esb.demo.model.CompteRenduModel;
 
-@RestController
-@RequestMapping("/Compte")
+
 public class CompteRenduController {
-	private final CompteRenduService compteRenduService;
-	
-public CompteRenduController(CompteRenduService compteRenduService)	{
-	this.compteRenduService = compteRenduService;
-}
 
+	private CompteRenduService compteRenduService;
 
+	@PostMapping("/créer")
+	public ResponseEntity<CompteRenduModel>créer(@RequestBody CompteRenduModel compteRenduModel) {
+		CompteRenduModel  newCompteRenduModel=compteRenduService.créer(compteRenduModel);
+	return new ResponseEntity<>(newCompteRenduModel,HttpStatus.CREATED);
 
-@PostMapping("/créer")
-public ResponseEntity<CompteRendu>créerCompteRendu(@RequestBody CompteRendu compteRendu) {
-CompteRendu  newCompteRendu=compteRenduService.créer(compteRendu);
-return new ResponseEntity<>(newCompteRendu,HttpStatus.CREATED);
-
-
-
-}
+	}
 }

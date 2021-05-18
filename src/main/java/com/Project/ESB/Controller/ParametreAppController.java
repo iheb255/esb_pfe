@@ -1,4 +1,4 @@
-package com.Project.ESB.Controller;
+package project.esb.demo.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,28 +8,34 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.Project.ESB.Model.ParametreApp;
-import com.Project.ESB.Service.ParametreAppService;
+import project.esb.demo.model.ParametreAppModel;
+import project.esb.demo.service.ParametreAppService;
+
+
 
 @RestController
-@RequestMapping("/ParametreApp")
+@RequestMapping("/ParametreAppModel")
 public class ParametreAppController {
-	private final ParametreAppService ParametreAppService;
+	private final ParametreAppService parametreAppService;
 	
 public ParametreAppController(ParametreAppService parametreAppService)	{
-	this.ParametreAppService = parametreAppService;
+	this. parametreAppService =  parametreAppService;
 }
 
+
 @PostMapping("/ajouter")
-public ResponseEntity<ParametreApp>ajouterParametreApp(@RequestBody ParametreApp parametreApp) {
-	ParametreApp  newParametreApp=ParametreAppService.ajouter(parametreApp);
-return new ResponseEntity<>(newParametreApp,HttpStatus.CREATED);
+public ResponseEntity< ParametreAppModel>ajouter(@RequestBody  ParametreAppModel  parametreAppModel) {
+	ParametreAppModel  newParametreAppModel= parametreAppService.ajouter( parametreAppModel);
+	 return new ResponseEntity<>(newParametreAppModel,HttpStatus.CREATED);
 
 }
 @PutMapping("/modifier")
-public ResponseEntity<ParametreApp>modifierParametreApp(@RequestBody ParametreApp parametreApp) {
-	ParametreApp  modifierParametreApp=ParametreAppService.modifier(parametreApp);
-return new ResponseEntity<>(modifierParametreApp,HttpStatus.OK);
+public ResponseEntity<ParametreAppModel>updateParametreAppModel(@RequestBody ParametreAppModel parametreAppModel) {
+	ParametreAppModel  updateParametreAppModel=parametreAppService.modifier(parametreAppModel);
+return new ResponseEntity<>(updateParametreAppModel,HttpStatus.OK);
 
 }
+
+
+
 }

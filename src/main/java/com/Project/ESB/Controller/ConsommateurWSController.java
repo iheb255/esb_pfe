@@ -1,4 +1,4 @@
-package com.Project.ESB.Controller;
+package project.esb.demo.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,28 +7,32 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import project.esb.demo.model.ConsommateurWSModel;
+import project.esb.demo.service.ConsommateurWSService;
 
-import com.Project.ESB.Model.ConsommateurWS;
-import com.Project.ESB.Service.ConsommateurWSService;
+
 
 @RestController
-@RequestMapping("/ConsommateurWS")
+@RequestMapping("/ParametreAppModel")
 public class ConsommateurWSController {
-	private final ConsommateurWSService ConsommateurWSService;
+	private final ConsommateurWSService consommateurWSService;
 	
 public ConsommateurWSController(ConsommateurWSService consommateurWSService)	{
-	this.ConsommateurWSService = consommateurWSService;
+	this. consommateurWSService =  consommateurWSService;
 }
+
+
 @PostMapping("/ajouter")
-public ResponseEntity<ConsommateurWS>ajouterConsommateurWS(@RequestBody ConsommateurWS consommateurWS) {
-	ConsommateurWS  newConsommateurWS=ConsommateurWSService.ajouter(consommateurWS);
-return new ResponseEntity<>(newConsommateurWS,HttpStatus.CREATED);
+public ResponseEntity< ConsommateurWSModel>ajouter(@RequestBody  ConsommateurWSModel  consommateurWSModel) {
+	ConsommateurWSModel  newConsommateurWSModel= consommateurWSService.ajouter(consommateurWSModel);
+	 return new ResponseEntity<>(newConsommateurWSModel,HttpStatus.CREATED);
 
 }
 @PutMapping("/modifier")
-public ResponseEntity<ConsommateurWS>modifierConsommateurWS(@RequestBody ConsommateurWS consommateurWS) {
-	ConsommateurWS  modifierConsommateurWS=ConsommateurWSService.modifier(consommateurWS);
-return new ResponseEntity<>(modifierConsommateurWS,HttpStatus.OK);
+public ResponseEntity<ConsommateurWSModel>updateConsommateurWSModel(@RequestBody ConsommateurWSModel consommateurWSModel) {
+	ConsommateurWSModel  updateConsommateurWSModel=consommateurWSService.modifier(consommateurWSModel);
+return new ResponseEntity<>(updateConsommateurWSModel,HttpStatus.OK);
 
 }
+
 }
